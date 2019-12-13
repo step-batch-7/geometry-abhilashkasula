@@ -64,6 +64,10 @@ describe("Line", function() {
       const line2 = new Line({ x: 4, y: -2 }, { x: 4, y: 4 });
       assert.isNotOk(line1.isParallelTo(line2));
     });
+    it("should determine false for lines having same coordinates.", function() {
+      const line1 = new Line({ x: 0, y: -2 }, { x: -1, y: 4 });
+      assert.isNotOk(line1.isParallelTo(line1));
+    });
   });
 
   describe("slope", function() {
