@@ -23,10 +23,9 @@ class Line {
 
   get length() {
     const { endA, endB } = this;
-    const distance = Math.sqrt(
-      Math.pow(endB.x - endA.x, 2) + Math.pow(endB.y - endA.y, 2)
-    );
-    return distance;
+    const sumOfSquaresOfDiff =
+      Math.pow(endB.x - endA.x, 2) + Math.pow(endB.y - endA.y, 2);
+    return Math.sqrt(sumOfSquaresOfDiff);
   }
 
   get slope() {
