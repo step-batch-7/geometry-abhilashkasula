@@ -68,6 +68,11 @@ describe("Line", function() {
       const line1 = new Line({ x: 0, y: -2 }, { x: -1, y: 4 });
       assert.isNotOk(line1.isParallelTo(line1));
     });
+    it("should determine false for 2 different type of lines.", function() {
+      const line1 = new Line({ x: 0, y: -2 }, { x: -1, y: 4 });
+      const line2 = { endA: { x: 0, y: -2 }, endB: { x: -1, y: 4 } };
+      assert.isNotOk(line1.isParallelTo(line2));
+    });
   });
 
   describe("slope", function() {
