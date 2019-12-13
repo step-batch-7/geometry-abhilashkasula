@@ -4,12 +4,6 @@ const arePointsEqual = (line1End, line2End) => {
   return areXCoordinatesEqual && areYCoordinatesEqual;
 };
 
-const slopeOfLine = (endA, endB) => {
-  const diffOfYCoordinates = endB.y - endA.y;
-  const diffOfXCoordinates = endB.x - endA.x;
-  return diffOfYCoordinates / diffOfXCoordinates;
-};
-
 class Line {
   constructor(endA, endB) {
     this.endA = { x: endA.x, y: endA.y };
@@ -35,10 +29,17 @@ class Line {
     return distance;
   }
 
+  get slope() {
+    const { endA, endB } = this;
+    const diffOfYCoordinates = endB.y - endA.y;
+    const diffOfXCoordinates = endB.x - endA.x;
+    return diffOfYCoordinates / diffOfXCoordinates;
+  }
+
   isParallelTo(other) {
     const { endA, endB } = other;
-    const slopeOfLine1 = slopeOfLine(this.endA, this.endB);
-    const slopeOfLine2 = slopeOfLine(endA, endB);
+    const slopeOfLine1 = this.slope;
+    const slopeOfLine2 = other.slope;
     return slopeOfLine1 == slopeOfLine2;
   }
 }

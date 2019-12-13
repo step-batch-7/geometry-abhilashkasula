@@ -55,4 +55,11 @@ describe("Line", function() {
       assert.isNotOk(line1.isParallelTo(line2));
     });
   });
+
+  describe("slope", function() {
+    it("should give slope of a line for positive coordinates", function() {
+      const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 3 });
+      assert.strictEqual(line1.slope, 0.5);
+    });
+  });
 });
