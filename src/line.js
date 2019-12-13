@@ -15,7 +15,9 @@ class Line {
   }
   isEqualTo(line) {
     const { endA, endB } = line;
+    const isInstanceLine = line instanceof Line;
     return (
+      isInstanceLine &&
       areCoordinatesEqual(this.endA, endA) &&
       areCoordinatesEqual(this.endB, endB)
     );
