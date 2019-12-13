@@ -31,4 +31,11 @@ describe("Line", function() {
       assert.isNotOk(line1.isEqualTo(line2));
     });
   });
+
+  describe("length", function() {
+    it("should give the length of the line for positive coordinates", function() {
+      const line1 = new Line({ x: 3, y: 2 }, { x: 7, y: 8 });
+      assert.isAtLeast(line1.length, 7.21);
+    });
+  });
 });

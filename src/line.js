@@ -18,6 +18,14 @@ class Line {
     if (!(other instanceof Line)) return false;
     return arePointsEqual(this.endA, endA) && arePointsEqual(this.endB, endB);
   }
+
+  get length() {
+    const { endA, endB } = this;
+    const distance = Math.sqrt(
+      Math.pow(endB.x - endA.x, 2) + Math.pow(endB.y - endA.y, 2)
+    );
+    return distance;
+  }
 }
 
 module.exports = Line;
