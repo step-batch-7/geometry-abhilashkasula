@@ -35,7 +35,7 @@ describe("Line", function() {
   describe("length", function() {
     it("should give the length of the line for positive coordinates", function() {
       const line1 = new Line({ x: 3, y: 2 }, { x: 7, y: 8 });
-      assert.approximately(line1.length, 7.21, 7.3);
+      assert.approximately(line1.length, 7.21, 0.3);
     });
     it("should give the zero for the line having same points", function() {
       const line1 = new Line({ x: 3, y: 2 }, { x: 3, y: 2 });
@@ -60,6 +60,10 @@ describe("Line", function() {
     it("should give slope of a line for positive coordinates", function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 3 });
       assert.strictEqual(line1.slope, 0.5);
+    });
+    it("should give slope of a line for negative coordinates", function() {
+      const line1 = new Line({ x: -1, y: -2 }, { x: 3, y: 3 });
+      assert.strictEqual(line1.slope, 1.25);
     });
   });
 });
