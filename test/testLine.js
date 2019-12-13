@@ -37,5 +37,9 @@ describe("Line", function() {
       const line1 = new Line({ x: 3, y: 2 }, { x: 7, y: 8 });
       assert.isAtLeast(line1.length, 7.21);
     });
+    it("should give the zero for the line having same points", function() {
+      const line1 = new Line({ x: 3, y: 2 }, { x: 3, y: 2 });
+      assert.strictEqual(line1.length, 0);
+    });
   });
 });
