@@ -49,5 +49,10 @@ describe("Line", function() {
       const line2 = new Line({ x: 4, y: 0 }, { x: 4, y: 4 });
       assert.isOk(line1.isParallelTo(line2));
     });
+    it("should determine false for lines not parallel when coordinates are positive.", function() {
+      const line1 = new Line({ x: 0, y: 0 }, { x: 0, y: 4 });
+      const line2 = new Line({ x: 1, y: 2 }, { x: 3, y: 3 });
+      assert.isNotOk(line1.isParallelTo(line2));
+    });
   });
 });
