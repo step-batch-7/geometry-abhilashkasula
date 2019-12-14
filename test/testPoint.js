@@ -55,5 +55,13 @@ describe("Point", function() {
       const point = new Point(2, 3);
       assert.deepStrictEqual(point.clone(), point);
     });
+    it("should give a copy of point for negative coordinates", function() {
+      const point = new Point(2, -3);
+      assert.deepStrictEqual(point.clone(), point);
+    });
+    it("should give a copy of point for positive coordinates", function() {
+      const point = new Point(-2, -3);
+      assert.deepStrictEqual(point.clone(), point);
+    });
   });
 });
