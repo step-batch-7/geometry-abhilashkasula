@@ -50,6 +50,13 @@ class Line {
     const product = this.slope * endA.x;
     return (diffOfYCoordinates + product) / this.slope;
   }
+
+  findY(xCoordinate) {
+    const { endA } = this;
+    const diffOfXCoordinates = xCoordinate - endA.x;
+    const product = this.slope * diffOfXCoordinates;
+    return product + endA.y;
+  }
 }
 
 module.exports = Line;

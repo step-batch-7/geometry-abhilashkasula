@@ -4,8 +4,8 @@ const Line = require("../src/line");
 describe("Line", function() {
   describe("toString", function() {
     it("should give a string representation of line", function() {
-      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
-      assert.strictEqual(line1.toString(), `Line (1,2),(4,5).`);
+      const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      assert.strictEqual(line.toString(), `Line (1,2),(4,5).`);
     });
   });
 
@@ -34,12 +34,12 @@ describe("Line", function() {
 
   describe("length", function() {
     it("should give the length of the line for positive coordinates", function() {
-      const line1 = new Line({ x: 3, y: 2 }, { x: 7, y: 8 });
-      assert.approximately(line1.length, 7.21, 0.3);
+      const line = new Line({ x: 3, y: 2 }, { x: 7, y: 8 });
+      assert.approximately(line.length, 7.21, 0.3);
     });
     it("should give the zero for the line having same points", function() {
-      const line1 = new Line({ x: 3, y: 2 }, { x: 3, y: 2 });
-      assert.strictEqual(line1.length, 0);
+      const line = new Line({ x: 3, y: 2 }, { x: 3, y: 2 });
+      assert.strictEqual(line.length, 0);
     });
   });
 
@@ -65,8 +65,8 @@ describe("Line", function() {
       assert.isNotOk(line1.isParallelTo(line2));
     });
     it("should determine false for lines having same coordinates.", function() {
-      const line1 = new Line({ x: 0, y: -2 }, { x: -1, y: 4 });
-      assert.isNotOk(line1.isParallelTo(line1));
+      const line = new Line({ x: 0, y: -2 }, { x: -1, y: 4 });
+      assert.isNotOk(line.isParallelTo(line));
     });
     it("should determine false for 2 different type of lines.", function() {
       const line1 = new Line({ x: 0, y: -2 }, { x: -1, y: 4 });
@@ -77,31 +77,38 @@ describe("Line", function() {
 
   describe("slope", function() {
     it("should give slope of a line for positive coordinates", function() {
-      const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 3 });
-      assert.strictEqual(line1.slope, 0.5);
+      const line = new Line({ x: 1, y: 2 }, { x: 3, y: 3 });
+      assert.strictEqual(line.slope, 0.5);
     });
     it("should give slope of a line for negative coordinates", function() {
-      const line1 = new Line({ x: -1, y: -2 }, { x: 3, y: 3 });
-      assert.strictEqual(line1.slope, 1.25);
+      const line = new Line({ x: -1, y: -2 }, { x: 3, y: 3 });
+      assert.strictEqual(line.slope, 1.25);
     });
   });
 
   describe("findX", function() {
     it("should give x-coordinate of a point when y is given positive", function() {
-      const line1 = new Line({ x: 5, y: 5 }, { x: 1, y: 2 });
-      assert.approximately(line1.findX(3), 2.3, 0.2);
+      const line = new Line({ x: 5, y: 5 }, { x: 1, y: 2 });
+      assert.approximately(line.findX(3), 2.3, 0.2);
     });
     it("should give x-coordinate of a point when y is given negative", function() {
-      const line1 = new Line({ x: -5, y: -3 }, { x: -1, y: -4 });
-      assert.approximately(line1.findX(-3), -5, 0.2);
+      const line = new Line({ x: -5, y: -3 }, { x: -1, y: -4 });
+      assert.approximately(line.findX(-3), -5, 0.2);
     });
     it("should give first end x when y-coordinates of given point and first end are equal", () => {
-      const line1 = new Line({ x: 5, y: 2 }, { x: 1, y: 5 });
-      assert.strictEqual(line1.findX(2), 5);
+      const line = new Line({ x: 5, y: 2 }, { x: 1, y: 5 });
+      assert.strictEqual(line.findX(2), 5);
     });
     it("should give second end x when y-coordinates of given point and second end are equal", () => {
-      const line1 = new Line({ x: 5, y: 2 }, { x: 1, y: 5 });
-      assert.strictEqual(line1.findX(5), 1);
+      const line = new Line({ x: 5, y: 2 }, { x: 1, y: 5 });
+      assert.strictEqual(line.findX(5), 1);
+    });
+  });
+
+  describe("findY", function() {
+    it("should give y-coordinate of a point when x is given positive", function() {
+      const line = new Line({ x: 5, y: 2 }, { x: 1, y: 5 });
+      assert.strictEqual(line.findY(2), 4.25);
     });
   });
 });
