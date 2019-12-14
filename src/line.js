@@ -12,7 +12,7 @@ class Line {
 
   toString() {
     const { endA, endB } = this;
-    return `Line (${endA.x},${endA.y}),(${endB.x},${endB.y}).`;
+    return `[Line (${endA.x},${endA.y}) to (${endB.x},${endB.y})]`;
   }
 
   isEqualTo(other) {

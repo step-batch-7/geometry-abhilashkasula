@@ -5,7 +5,7 @@ describe("Line", function() {
   describe("toString", function() {
     it("should give a string representation of line", function() {
       const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
-      assert.strictEqual(line.toString(), `Line (1,2),(4,5).`);
+      assert.strictEqual(line.toString(), `[Line (1,2) to (4,5)]`);
     });
   });
 
