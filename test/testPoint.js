@@ -38,5 +38,15 @@ describe("Point", function() {
       const point1 = new Point(2, 3);
       assert.isOk(point1.isEqualTo(point1));
     });
+    it("should determine false for two points are not same but instances", function() {
+      const point1 = new Point(2, 3);
+      const point2 = new Point(4, 5);
+      assert.isNotOk(point1.isEqualTo(point2));
+    });
+    it("should determine false for two points are same but not instances", function() {
+      const point1 = new Point(2, 3);
+      const point2 = { x: 2, y: 3 };
+      assert.isNotOk(point1.isEqualTo(point2));
+    });
   });
 });
