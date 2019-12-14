@@ -49,4 +49,11 @@ describe("Point", function() {
       assert.isNotOk(point1.isEqualTo(point2));
     });
   });
+
+  describe("clone", function() {
+    it("should give a copy of point for positive coordinates", function() {
+      const point = new Point(2, 3);
+      assert.deepStrictEqual(point.clone(), point);
+    });
+  });
 });
