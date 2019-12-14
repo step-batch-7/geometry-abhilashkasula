@@ -44,7 +44,8 @@ class Line {
 
   findX(yCoordinate) {
     const { endA, endB } = this;
-    if (endA.y == endB.y && endB.y == yCoordinate) return Infinity;
+    if (endA.y == yCoordinate) return endA.x;
+    if (endB.y == yCoordinate) return endB.x;
     const diffOfYCoordinates = yCoordinate - endA.y;
     const product = this.slope * endA.x;
     return (diffOfYCoordinates + product) / this.slope;
