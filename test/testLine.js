@@ -85,4 +85,11 @@ describe("Line", function() {
       assert.strictEqual(line1.slope, 1.25);
     });
   });
+
+  describe("findX", function() {
+    it("should give x-coordinate of a point when y is given positive", function() {
+      const line1 = new Line({ x: 5, y: 5 }, { x: 1, y: 2 });
+      assert.approximately(line1.findX(3), 2.3, 0.2);
+    });
+  });
 });

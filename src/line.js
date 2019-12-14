@@ -41,6 +41,13 @@ class Line {
     const slopeOfLine2 = other.slope;
     return slopeOfLine1 == slopeOfLine2;
   }
+
+  findX(yCoordinate) {
+    const { endA } = this;
+    const diffOfYCoordinates = yCoordinate - endA.y;
+    const product = this.slope * endA.x;
+    return (diffOfYCoordinates + product) / this.slope;
+  }
 }
 
 module.exports = Line;
