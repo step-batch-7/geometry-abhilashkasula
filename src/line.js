@@ -44,15 +44,19 @@ class Line {
 
   findX(yCoordinate) {
     const { endA, endB } = this;
-    if (endA.y == yCoordinate) return endA.x;
-    if (endB.y == yCoordinate) return endB.x;
+    const min = Math.min(endA.y, endB.y);
+    const max = Math.max(endA.y, endB.y);
+    if (yCoordinate < min || yCoordinate > max) return NaN;
     const diffOfYCoordinates = yCoordinate - endA.y;
     const product = this.slope * endA.x;
     return (diffOfYCoordinates + product) / this.slope;
   }
 
   findY(xCoordinate) {
-    const { endA } = this;
+    const { endA, endB } = this;
+    const min = Math.min(endA.x, endB.x);
+    const max = Math.max(endA.x, endB.x);
+    if (xCoordinate < min || xCoordinate > max) return NaN;
     const diffOfXCoordinates = xCoordinate - endA.x;
     const product = this.slope * diffOfXCoordinates;
     return product + endA.y;
