@@ -17,5 +17,19 @@ describe("Point", function() {
         5
       );
     });
+    it("should give the product of coordinates of the point for function reference product", function() {
+      const point = new Point(2, 3);
+      assert.strictEqual(
+        point.visit((x, y) => x * y),
+        6
+      );
+    });
+    it("should give the difference of coordinates of the point for function reference subtract", function() {
+      const point = new Point(3, 2);
+      assert.strictEqual(
+        point.visit((x, y) => x - y),
+        1
+      );
+    });
   });
 });
