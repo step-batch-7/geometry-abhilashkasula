@@ -4,6 +4,10 @@ const arePointsEqual = (line1End, line2End) => {
   return areXCoordinatesEqual && areYCoordinatesEqual;
 };
 
+const splitAt = (endA, endB) => {
+  return { x: (endA.x + endB.x) / 2, y: (endA.y + endB.y) / 2 };
+};
+
 class Line {
   constructor(endA, endB) {
     this.endA = { x: endA.x, y: endA.y };
@@ -60,6 +64,15 @@ class Line {
     const diffOfXCoordinates = xCoordinate - endA.x;
     const product = this.slope * diffOfXCoordinates;
     return product + endA.y;
+  }
+
+  split() {
+    const { endA, endB } = this;
+    const splitLineAt = splitAt(endA, endB);
+    return [
+      new Line({ x: endA.x, y: endA.y }, splitLineAt),
+      new Line(splitLineAt, { x: endB.x, y: endB.y })
+    ];
   }
 }
 

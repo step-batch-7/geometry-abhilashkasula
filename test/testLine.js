@@ -138,4 +138,13 @@ describe("Line", function() {
       assert.isNaN(line.findX(0));
     });
   });
+
+  describe("split", function() {
+    it("should give two lines that are split by midpoint", function() {
+      const line = new Line({ x: 4, y: 4 }, { x: 8, y: 8 });
+      const line1 = new Line({ x: 4, y: 4 }, { x: 6, y: 6 });
+      const line2 = new Line({ x: 6, y: 6 }, { x: 8, y: 8 });
+      assert.deepStrictEqual(line.split(), [line1, line2]);
+    });
+  });
 });
