@@ -140,10 +140,22 @@ describe("Line", function() {
   });
 
   describe("split", function() {
-    it("should give two lines that are split by midpoint", function() {
+    it("should give two lines that are split by midpoint for positive coordinates", function() {
       const line = new Line({ x: 4, y: 4 }, { x: 8, y: 8 });
       const line1 = new Line({ x: 4, y: 4 }, { x: 6, y: 6 });
       const line2 = new Line({ x: 6, y: 6 }, { x: 8, y: 8 });
+      assert.deepStrictEqual(line.split(), [line1, line2]);
+    });
+    it("should give two lines that are split by midpoint for negative coordinates", function() {
+      const line = new Line({ x: -4, y: -4 }, { x: 8, y: 8 });
+      const line1 = new Line({ x: -4, y: -4 }, { x: 2, y: 2 });
+      const line2 = new Line({ x: 2, y: 2 }, { x: 8, y: 8 });
+      assert.deepStrictEqual(line.split(), [line1, line2]);
+    });
+    it("should give two lines that are split by midpoint for odd coordinates", function() {
+      const line = new Line({ x: 3, y: 4 }, { x: 8, y: 8 });
+      const line1 = new Line({ x: 3, y: 4 }, { x: 5.5, y: 6 });
+      const line2 = new Line({ x: 5.5, y: 6 }, { x: 8, y: 8 });
       assert.deepStrictEqual(line.split(), [line1, line2]);
     });
   });
