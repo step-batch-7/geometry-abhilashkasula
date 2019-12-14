@@ -95,5 +95,9 @@ describe("Line", function() {
       const line1 = new Line({ x: -5, y: -3 }, { x: -1, y: -4 });
       assert.approximately(line1.findX(-3), -5, 0.2);
     });
+    it("should give Infinity when all the y-coodinates are equal", () => {
+      const line1 = new Line({ x: 5, y: 2 }, { x: 1, y: 2 });
+      assert.strictEqual(line1.findX(2), Infinity);
+    });
   });
 });
