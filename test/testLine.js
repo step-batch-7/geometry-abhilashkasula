@@ -91,5 +91,9 @@ describe("Line", function() {
       const line1 = new Line({ x: 5, y: 5 }, { x: 1, y: 2 });
       assert.approximately(line1.findX(3), 2.3, 0.2);
     });
+    it("should give x-coordinate of a point when y is given negative", function() {
+      const line1 = new Line({ x: -5, y: -3 }, { x: -1, y: -4 });
+      assert.approximately(line1.findX(-3), -5, 0.2);
+    });
   });
 });
