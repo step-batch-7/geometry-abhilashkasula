@@ -32,4 +32,11 @@ describe("Point", function() {
       );
     });
   });
+
+  describe("isEqualTo", function() {
+    it("should determine true for two points are at same position", function() {
+      const point1 = new Point(2, 3);
+      assert.isOk(point1.isEqualTo(point1));
+    });
+  });
 });

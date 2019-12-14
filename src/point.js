@@ -9,6 +9,12 @@ class Point {
   visit(operation) {
     return operation(this.x, this.y);
   }
+
+  isEqualTo(other) {
+    const { x, y } = other;
+    if (!(other instanceof Point)) return false;
+    return x == this.x && y == this.y;
+  }
 }
 
 module.exports = Point;

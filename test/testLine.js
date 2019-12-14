@@ -11,9 +11,8 @@ describe("Line", function() {
 
   describe("isEqualTo", function() {
     it("should determine true for two line ends and instances are same", function() {
-      const line1 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
-      const line2 = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
-      assert.isOk(line1.isEqualTo(line2));
+      const line = new Line({ x: 1, y: 2 }, { x: 4, y: 5 });
+      assert.isOk(line.isEqualTo(line));
     });
     it("should determine false for two line ends are not same but instances", function() {
       const line1 = new Line({ x: 1, y: 2 }, { x: 3, y: 5 });
