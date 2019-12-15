@@ -59,7 +59,7 @@ describe("Line", function() {
       const line2 = new Line({ x: 1, y: 2 }, { x: 3, y: 3 });
       assert.isNotOk(line1.isParallelTo(line2));
     });
-    it("should determine false for lines parallel when coordinates are negative", function() {
+    it("should determine false for lines not parallel when coordinates are negative", function() {
       const line1 = new Line({ x: 0, y: -2 }, { x: -1, y: 4 });
       const line2 = new Line({ x: 4, y: -2 }, { x: 4, y: 4 });
       assert.isNotOk(line1.isParallelTo(line2));
@@ -71,6 +71,14 @@ describe("Line", function() {
     it("should determine false for 2 different type of lines.", function() {
       const line1 = new Line({ x: 0, y: -2 }, { x: -1, y: 4 });
       const line2 = { endA: { x: 0, y: -2 }, endB: { x: -1, y: 4 } };
+      assert.isNotOk(line1.isParallelTo(line2));
+    });
+    it("should determine false for lines overlapping", function() {
+      let line1 = new Line({ x: 0, y: 0 }, { x: 4, y: 0 });
+      let line2 = new Line({ x: 1, y: 0 }, { x: 3, y: 0 });
+      assert.isNotOk(line1.isParallelTo(line2));
+      line1 = new Line({ x: 0, y: 0 }, { x: 0, y: 4 });
+      line2 = new Line({ x: 0, y: 1 }, { x: 0, y: 3 });
       assert.isNotOk(line1.isParallelTo(line2));
     });
   });

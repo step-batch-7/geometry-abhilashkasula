@@ -48,16 +48,17 @@ class Line {
   }
 
   isParallelTo(other) {
-    if (!(other instanceof Line) || this.isEqualTo(other)) return false;
-    const slopeOfLine1 = this.slope;
-    const slopeOfLine2 = other.slope;
-    return slopeOfLine1 == slopeOfLine2;
+    if (!(other instanceof Line)) return false;
+    const areLinesOverlapping =
+      this.hasPoint(new Point(other.endA.x, other.endA.y)) ||
+      this.hasPoint(new Point(other.endB.x, other.endB.y));
+    return !areLinesOverlapping && this.slope == other.slope;
   }
 
   findX(yCoordinate) {
     const { endA, endB } = this;
     if (isPointNotInRange([endA.y, endB.y], yCoordinate)) return NaN;
-    if (endA.y == endB.y) return endA.x;
+    if (endA.y == endB.y || endA.x == endB.x) return endA.x;
     const diffOfYCoordinates = yCoordinate - endA.y;
     const product = this.slope * endA.x;
     return (diffOfYCoordinates + product) / this.slope;
@@ -66,7 +67,7 @@ class Line {
   findY(xCoordinate) {
     const { endA, endB } = this;
     if (isPointNotInRange([endA.x, endB.x], xCoordinate)) return NaN;
-    if (endA.x == endB.x) return endA.y;
+    if (endA.x == endB.x || endA.y == endB.y) return endA.y;
     const diffOfXCoordinates = xCoordinate - endA.x;
     const product = this.slope * diffOfXCoordinates;
     return product + endA.y;
@@ -79,7 +80,9 @@ class Line {
   }
 
   hasPoint(point) {
-    return point instanceof Point && point.x == this.findX(point.y);
+    const isXorYEqual =
+      point.y == this.findY(point.x) || point.x == this.findX(point.y);
+    return point instanceof Point && isXorYEqual;
   }
 }
 
