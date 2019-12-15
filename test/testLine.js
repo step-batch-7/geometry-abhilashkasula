@@ -1,5 +1,6 @@
 const { assert } = require("chai");
 const Line = require("../src/line");
+const Point = require("../src/point");
 
 describe("Line", function() {
   describe("toString", function() {
@@ -165,6 +166,24 @@ describe("Line", function() {
       const line1 = new Line({ x: 3, y: 4 }, { x: 5.5, y: 6 });
       const line2 = new Line({ x: 5.5, y: 6 }, { x: 8, y: 8 });
       assert.deepStrictEqual(line.split(), [line1, line2]);
+    });
+  });
+
+  describe("hasPoint", function() {
+    it("should determine true for the point on the line segment", function() {
+      const line = new Line({ x: 4, y: 4 }, { x: 8, y: 8 });
+      const point = new Point(6, 6);
+      assert.isOk(line.hasPoint(point));
+    });
+    it("should determine false for the point not on the line segment", function() {
+      const line = new Line({ x: 4, y: 4 }, { x: 8, y: 8 });
+      const point = new Point(4, 6);
+      assert.isNotOk(line.hasPoint(point));
+    });
+    it("should determine false for the give point is not an instance of Point", function() {
+      const line = new Line({ x: 4, y: 4 }, { x: 8, y: 8 });
+      const point = { x: 4, y: 6 };
+      assert.isNotOk(line.hasPoint(point));
     });
   });
 });

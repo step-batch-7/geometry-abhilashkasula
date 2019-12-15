@@ -1,3 +1,5 @@
+const Point = require("./point");
+
 const arePointsEqual = (line1End, line2End) => {
   const areXCoordinatesEqual = line1End.x == line2End.x;
   const areYCoordinatesEqual = line1End.y == line2End.y;
@@ -55,7 +57,7 @@ class Line {
   findX(yCoordinate) {
     const { endA, endB } = this;
     if (isPointNotInRange([endA.y, endB.y], yCoordinate)) return NaN;
-    if (this.slope == 0) return endA.x;
+    if (endA.y == endB.y) return endA.x;
     const diffOfYCoordinates = yCoordinate - endA.y;
     const product = this.slope * endA.x;
     return (diffOfYCoordinates + product) / this.slope;
@@ -64,7 +66,7 @@ class Line {
   findY(xCoordinate) {
     const { endA, endB } = this;
     if (isPointNotInRange([endA.x, endB.x], xCoordinate)) return NaN;
-    if (this.slope == Infinity || this.slope == -Infinity) return endA.y;
+    if (endA.x == endB.x) return endA.y;
     const diffOfXCoordinates = xCoordinate - endA.x;
     const product = this.slope * diffOfXCoordinates;
     return product + endA.y;
@@ -74,6 +76,10 @@ class Line {
     const { endA, endB } = this;
     const splitLineAt = splitAt(endA, endB);
     return [new Line(endA, splitLineAt), new Line(splitLineAt, endB)];
+  }
+
+  hasPoint(point) {
+    return point instanceof Point && point.x == this.findX(point.y);
   }
 }
 
