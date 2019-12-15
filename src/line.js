@@ -8,6 +8,12 @@ const splitAt = (endA, endB) => {
   return { x: (endA.x + endB.x) / 2, y: (endA.y + endB.y) / 2 };
 };
 
+const isPointNotInRange = (range, coordinate) => {
+  const min = Math.min(range[0], range[1]);
+  const max = Math.max(range[0], range[1]);
+  return coordinate > max || coordinate < min;
+};
+
 class Line {
   constructor(endA, endB) {
     this.endA = { x: endA.x, y: endA.y };
@@ -48,9 +54,8 @@ class Line {
 
   findX(yCoordinate) {
     const { endA, endB } = this;
-    const min = Math.min(endA.y, endB.y);
-    const max = Math.max(endA.y, endB.y);
-    if (yCoordinate < min || yCoordinate > max) return NaN;
+    if (isPointNotInRange([endA.y, endB.y], yCoordinate)) return NaN;
+    if (this.slope == 0) return endA.x;
     const diffOfYCoordinates = yCoordinate - endA.y;
     const product = this.slope * endA.x;
     return (diffOfYCoordinates + product) / this.slope;
@@ -58,9 +63,8 @@ class Line {
 
   findY(xCoordinate) {
     const { endA, endB } = this;
-    const min = Math.min(endA.x, endB.x);
-    const max = Math.max(endA.x, endB.x);
-    if (xCoordinate < min || xCoordinate > max) return NaN;
+    if (isPointNotInRange([endA.x, endB.x], xCoordinate)) return NaN;
+    if (this.slope == Infinity || this.slope == -Infinity) return endA.y;
     const diffOfXCoordinates = xCoordinate - endA.x;
     const product = this.slope * diffOfXCoordinates;
     return product + endA.y;
@@ -69,10 +73,7 @@ class Line {
   split() {
     const { endA, endB } = this;
     const splitLineAt = splitAt(endA, endB);
-    return [
-      new Line({ x: endA.x, y: endA.y }, splitLineAt),
-      new Line(splitLineAt, { x: endB.x, y: endB.y })
-    ];
+    return [new Line(endA, splitLineAt), new Line(splitLineAt, endB)];
   }
 }
 

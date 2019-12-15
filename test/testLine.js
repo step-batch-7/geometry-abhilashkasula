@@ -110,6 +110,10 @@ describe("Line", function() {
       const line = new Line({ x: 5, y: 2 }, { x: 1, y: 5 });
       assert.isNaN(line.findX(1));
     });
+    it("should give end A x when the y-coordinates of both ends are equal", () => {
+      const line = new Line({ x: 4, y: 2 }, { x: 6, y: 2 });
+      assert.strictEqual(line.findX(2), 4);
+    });
   });
 
   describe("findY", function() {
@@ -131,11 +135,15 @@ describe("Line", function() {
     });
     it("should give NaN for point x greater than line segment", () => {
       const line = new Line({ x: 2, y: 5 }, { x: 5, y: 1 });
-      assert.isNaN(line.findX(6));
+      assert.isNaN(line.findY(6));
     });
     it("should give NaN for point x lesser than line segment", () => {
       const line = new Line({ x: 2, y: 5 }, { x: 5, y: 1 });
-      assert.isNaN(line.findX(0));
+      assert.isNaN(line.findY(0));
+    });
+    it("should give end A y when the x-coordinates of both ends are equal", () => {
+      const line = new Line({ x: 2, y: 4 }, { x: 2, y: 6 });
+      assert.strictEqual(line.findY(2), 4);
     });
   });
 
