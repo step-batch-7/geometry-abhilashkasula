@@ -89,5 +89,20 @@ describe("Point", function() {
       const point = new Point(6, 6);
       assert.isOk(point.isOn(line));
     });
+    it("should determine false for the point not on the line", () => {
+      const line = new Line({ x: 4, y: 4 }, { x: 8, y: 8 });
+      const point = new Point(4, 6);
+      assert.isNotOk(point.isOn(line));
+    });
+    it("should determine true for the point is on the line when negative coordinates are give", function() {
+      const line = new Line({ x: -4, y: -4 }, { x: -8, y: -8 });
+      const point = new Point(-6, -6);
+      assert.isOk(point.isOn(line));
+    });
+    it("should determine false for the point not on the line when negative coordinates are given", () => {
+      const line = new Line({ x: 4, y: 4 }, { x: -8, y: -8 });
+      const point = new Point(-4, -6);
+      assert.isNotOk(point.isOn(line));
+    });
   });
 });
