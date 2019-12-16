@@ -77,6 +77,8 @@ describe("Line", function() {
       let line1 = new Line({ x: 0, y: 0 }, { x: 4, y: 0 });
       let line2 = new Line({ x: 1, y: 0 }, { x: 3, y: 0 });
       assert.isNotOk(line1.isParallelTo(line2));
+    });
+    it("should", () => {
       line1 = new Line({ x: 0, y: 0 }, { x: 0, y: 4 });
       line2 = new Line({ x: 0, y: 1 }, { x: 0, y: 3 });
       assert.isNotOk(line1.isParallelTo(line2));

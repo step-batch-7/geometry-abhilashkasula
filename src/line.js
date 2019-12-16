@@ -16,6 +16,15 @@ const isPointNotInRange = (range, coordinate) => {
   return coordinate > max || coordinate < min;
 };
 
+const arePointsCollinear = (point1, point2, point3) => {
+  return (
+    point1.x * (point2.y - point3.y) +
+      point2.x * (point3.y - point1.y) +
+      point3.x * (point1.y - point2.y) ==
+    0
+  );
+};
+
 class Line {
   constructor(endA, endB) {
     this.endA = { x: endA.x, y: endA.y };
@@ -49,16 +58,16 @@ class Line {
 
   isParallelTo(other) {
     if (!(other instanceof Line)) return false;
-    const areLinesOverlapping =
-      this.hasPoint(new Point(other.endA.x, other.endA.y)) ||
-      this.hasPoint(new Point(other.endB.x, other.endB.y));
-    return !areLinesOverlapping && this.slope == other.slope;
+    return (
+      !arePointsCollinear(this.endA, other.endA, this.endB) &&
+      this.slope === other.slope
+    );
   }
 
   findX(yCoordinate) {
     const { endA, endB } = this;
     if (isPointNotInRange([endA.y, endB.y], yCoordinate)) return NaN;
-    if (endA.y == endB.y || endA.x == endB.x) return endA.x;
+    if (endA.y == endB.y) return endA.x;
     const diffOfYCoordinates = yCoordinate - endA.y;
     const product = this.slope * endA.x;
     return (diffOfYCoordinates + product) / this.slope;
@@ -67,7 +76,7 @@ class Line {
   findY(xCoordinate) {
     const { endA, endB } = this;
     if (isPointNotInRange([endA.x, endB.x], xCoordinate)) return NaN;
-    if (endA.x == endB.x || endA.y == endB.y) return endA.y;
+    if (endA.x == endB.x) return endA.y;
     const diffOfXCoordinates = xCoordinate - endA.x;
     const product = this.slope * diffOfXCoordinates;
     return product + endA.y;
