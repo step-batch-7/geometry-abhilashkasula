@@ -1,6 +1,6 @@
 const Point = require("./point");
 
-const isPointNotInRange = (range, coordinate) => {
+const isNumberNotInRange = (range, coordinate) => {
   const min = Math.min(range[0], range[1]);
   const max = Math.max(range[0], range[1]);
   return coordinate > max || coordinate < min;
@@ -13,6 +13,10 @@ const arePointsCollinear = (point1, point2, point3) => {
       point3.x * (point1.y - point2.y) ==
     0
   );
+};
+
+const getCoordinate = (ratio, coordinate1, coordinate2) => {
+  return (1 - ratio) * coordinate1 + ratio * coordinate2;
 };
 
 class Line {
@@ -60,7 +64,7 @@ class Line {
 
   findX(yCoordinate) {
     const { endA, endB } = this;
-    if (isPointNotInRange([endA.y, endB.y], yCoordinate)) return NaN;
+    if (isNumberNotInRange([endA.y, endB.y], yCoordinate)) return NaN;
     if (endA.y == endB.y) return endA.x;
     const diffOfYCoordinates = yCoordinate - endA.y;
     const product = this.slope * endA.x;
@@ -69,7 +73,7 @@ class Line {
 
   findY(xCoordinate) {
     const { endA, endB } = this;
-    if (isPointNotInRange([endA.x, endB.x], xCoordinate)) return NaN;
+    if (isNumberNotInRange([endA.x, endB.x], xCoordinate)) return NaN;
     if (endA.x == endB.x) return endA.y;
     const diffOfXCoordinates = xCoordinate - endA.x;
     const product = this.slope * diffOfXCoordinates;
@@ -89,25 +93,17 @@ class Line {
 
   findPointFromStart(distance) {
     const ratio = distance / this.length;
-    const xCoordinate = (1 - ratio) * this.endA.x + ratio * this.endB.x;
-    const yCoordinate = (1 - ratio) * this.endA.y + ratio * this.endB.y;
-    if (
-      isPointNotInRange([this.endA.x, this.endB.x], xCoordinate) ||
-      isPointNotInRange([this.endA.y, this.endB.y], yCoordinate)
-    )
-      return null;
-    return new Point(xCoordinate, yCoordinate);
+    if (ratio > 1 || ratio < 0) return null;
+    const x = getCoordinate(ratio, this.endA.x, this.endB.x);
+    const y = getCoordinate(ratio, this.endA.y, this.endB.y);
+    return new Point(x, y);
   }
 
   findPointFromEnd(distance) {
     const ratio = distance / this.length;
-    const xCoordinate = (1 - ratio) * this.endB.x + ratio * this.endA.x;
-    const yCoordinate = (1 - ratio) * this.endB.y + ratio * this.endA.y;
-    if (
-      isPointNotInRange([this.endA.x, this.endB.x], xCoordinate) ||
-      isPointNotInRange([this.endA.y, this.endB.y], yCoordinate)
-    )
-      return null;
+    if (ratio > 1 || ratio < 0) return null;
+    const xCoordinate = getCoordinate(ratio, this.endB.x, this.endA.x);
+    const yCoordinate = getCoordinate(ratio, this.endB.y, this.endA.y);
     return new Point(xCoordinate, yCoordinate);
   }
 }
