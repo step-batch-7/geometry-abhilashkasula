@@ -42,4 +42,11 @@ describe("Circle", function() {
       assert.approximately(circle.area, 78.5, 0.1);
     });
   });
+
+  describe("perimeter", function() {
+    it("should give zero for the radius zero", function() {
+      const circle = new Circle({ x: 1, y: 2 }, 0);
+      assert.strictEqual(circle.perimeter, 0);
+    });
+  });
 });

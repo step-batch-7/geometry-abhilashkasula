@@ -1,9 +1,9 @@
 const Point = require("./point");
 
-const isNotInRange = (range, coordinate) => {
+const isNotInRange = (range, number) => {
   const min = Math.min(range[0], range[1]);
   const max = Math.max(range[0], range[1]);
-  return coordinate > max || coordinate < min;
+  return number > max || number < min;
 };
 
 const arePointsCollinear = (point1, point2, point3) => {
