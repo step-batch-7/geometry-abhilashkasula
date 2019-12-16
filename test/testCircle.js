@@ -8,6 +8,7 @@ describe("Circle", function() {
       assert.strictEqual(circle.toString(), `[Circle @(1,2) radius 5]`);
     });
   });
+
   describe("isEqualTo", function() {
     it("should determine true for the given circle is equal as well as it is an instance of Circle", function() {
       const circle1 = new Circle({ x: 1, y: 2 }, 5);
@@ -28,6 +29,17 @@ describe("Circle", function() {
       const circle1 = new Circle({ x: 2, y: 2 }, 5);
       const circle2 = { centre: { x: 1, y: 2 }, radius: 5 };
       assert.isNotOk(circle1.isEqualTo(circle2));
+    });
+  });
+
+  describe("area", function() {
+    it("should give zero for the radius zero", function() {
+      const circle = new Circle({ x: 1, y: 2 }, 0);
+      assert.strictEqual(circle.area, 0);
+    });
+    it("should give area of the circle for the radius given", function() {
+      const circle = new Circle({ x: 1, y: 2 }, 5);
+      assert.approximately(circle.area, 78.5, 0.1);
     });
   });
 });
