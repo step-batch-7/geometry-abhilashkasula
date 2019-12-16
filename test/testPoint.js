@@ -64,4 +64,12 @@ describe("Point", function() {
       assert.deepStrictEqual(point.clone(), point);
     });
   });
+
+  describe("findDistanceTo", function() {
+    it("should give the distance between two points for the point given is an instance of Point", function() {
+      const point1 = new Point(2, 2);
+      const point2 = new Point(7, 2);
+      assert.strictEqual(point1.findDistanceTo(point2), 5);
+    });
+  });
 });

@@ -44,9 +44,9 @@ class Line {
 
   get length() {
     const { endA, endB } = this;
-    const sumOfSquaresOfDiff =
-      Math.pow(endB.x - endA.x, 2) + Math.pow(endB.y - endA.y, 2);
-    return Math.sqrt(sumOfSquaresOfDiff);
+    const diffOfXCoordinates = endB.x - endA.x;
+    const diffOfYCoordinates = endB.y - endA.y;
+    return Math.hypot(diffOfXCoordinates, diffOfYCoordinates);
   }
 
   get slope() {
