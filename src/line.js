@@ -1,15 +1,5 @@
 const Point = require("./point");
 
-const arePointsEqual = (line1End, line2End) => {
-  const areXCoordinatesEqual = line1End.x == line2End.x;
-  const areYCoordinatesEqual = line1End.y == line2End.y;
-  return areXCoordinatesEqual && areYCoordinatesEqual;
-};
-
-const splitAt = (endA, endB) => {
-  return { x: (endA.x + endB.x) / 2, y: (endA.y + endB.y) / 2 };
-};
-
 const isPointNotInRange = (range, coordinate) => {
   const min = Math.min(range[0], range[1]);
   const max = Math.max(range[0], range[1]);
@@ -39,7 +29,11 @@ class Line {
   isEqualTo(other) {
     const { endA, endB } = other;
     if (!(other instanceof Line)) return false;
-    return arePointsEqual(this.endA, endA) && arePointsEqual(this.endB, endB);
+    const thisEndA = new Point(this.endA.x, this.endA.y);
+    const thisEndB = new Point(this.endB.x, this.endB.y);
+    const otherEndA = new Point(endA.x, endA.y);
+    const otherEndB = new Point(endB.x, endB.y);
+    return thisEndA.isEqualTo(otherEndA) && thisEndB.isEqualTo(otherEndB);
   }
 
   get length() {
@@ -84,8 +78,8 @@ class Line {
 
   split() {
     const { endA, endB } = this;
-    const splitLineAt = splitAt(endA, endB);
-    return [new Line(endA, splitLineAt), new Line(splitLineAt, endB)];
+    const midPoint = { x: (endA.x + endB.x) / 2, y: (endA.y + endB.y) / 2 };
+    return [new Line(endA, midPoint), new Line(midPoint, endB)];
   }
 
   hasPoint(point) {
@@ -97,6 +91,11 @@ class Line {
     const ratio = distance / this.length;
     const xCoordinate = (1 - ratio) * this.endA.x + ratio * this.endB.x;
     const yCoordinate = (1 - ratio) * this.endA.y + ratio * this.endB.y;
+    if (
+      isPointNotInRange([this.endA.x, this.endB.x], xCoordinate) ||
+      isPointNotInRange([this.endA.y, this.endB.y], yCoordinate)
+    )
+      return null;
     return new Point(xCoordinate, yCoordinate);
   }
 }

@@ -198,10 +198,24 @@ describe("Line", function() {
   });
 
   describe("findPointFromStart", function() {
-    it("should give the starting point for the distance is zero", function() {
+    it("should give the starting point of line for the distance is zero", function() {
       const line = new Line({ x: 1, y: 4 }, { x: 1, y: 8 });
       const point = new Point(1, 4);
       assert.deepStrictEqual(line.findPointFromStart(0), point);
+    });
+    it("should give point at a distance of one to starting point of line for the distance is one", function() {
+      const line = new Line({ x: 2, y: 4 }, { x: 2, y: 8 });
+      const point = new Point(2, 5);
+      assert.deepStrictEqual(line.findPointFromStart(1), point);
+    });
+    it("should give point at a distance of three to starting point of line for the distance is three", function() {
+      const line = new Line({ x: 2, y: 4 }, { x: 2, y: 8 });
+      const point = new Point(2, 7);
+      assert.deepStrictEqual(line.findPointFromStart(3), point);
+    });
+    it("should give null for there is no given distance on the line", function() {
+      const line = new Line({ x: 2, y: 4 }, { x: 2, y: 8 });
+      assert.deepStrictEqual(line.findPointFromStart(5), null);
     });
   });
 });
