@@ -25,6 +25,16 @@ class Circle {
   get perimeter() {
     return 2 * Math.PI * this.radius;
   }
+
+  hasPoint(point) {
+    if (!(point instanceof Point)) return false;
+    const sqrOfDiffOfxCoordinates = Math.pow(point.x - this.centre.x, 2);
+    const sqrOfDiffOfyCoordinates = Math.pow(point.y - this.centre.y, 2);
+    return (
+      Math.sqrt(sqrOfDiffOfxCoordinates + sqrOfDiffOfyCoordinates) ==
+      this.radius
+    );
+  }
 }
 
 module.exports = Circle;
