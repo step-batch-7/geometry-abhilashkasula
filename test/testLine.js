@@ -229,5 +229,23 @@ describe("Line", function() {
       const point = new Point(1, 8);
       assert.deepStrictEqual(line.findPointFromEnd(0), point);
     });
+    it("should give point at a distance of one to ending point of line for the distance is one", function() {
+      const line = new Line({ x: 2, y: 4 }, { x: 2, y: 8 });
+      const point = new Point(2, 7);
+      assert.deepStrictEqual(line.findPointFromEnd(1), point);
+    });
+    it("should give point at a distance of three to ending point of line for the distance is three", function() {
+      const line = new Line({ x: 2, y: 4 }, { x: 2, y: 8 });
+      const point = new Point(2, 5);
+      assert.deepStrictEqual(line.findPointFromEnd(3), point);
+    });
+    it("should give null for there is no given distance on the line", function() {
+      const line = new Line({ x: 2, y: 4 }, { x: 2, y: 8 });
+      assert.isNull(line.findPointFromEnd(6));
+    });
+    it("should give null for there is no given distance is negative", function() {
+      const line = new Line({ x: 2, y: 4 }, { x: 2, y: 8 });
+      assert.isNull(line.findPointFromEnd(-1));
+    });
   });
 });
