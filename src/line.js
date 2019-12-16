@@ -37,10 +37,7 @@ class Line {
   }
 
   get length() {
-    const { endA, endB } = this;
-    const diffOfXCoordinates = endB.x - endA.x;
-    const diffOfYCoordinates = endB.y - endA.y;
-    return Math.hypot(diffOfXCoordinates, diffOfYCoordinates);
+    return this.endA.findDistanceTo(this.endB);
   }
 
   get slope() {
