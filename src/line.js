@@ -98,6 +98,18 @@ class Line {
       return null;
     return new Point(xCoordinate, yCoordinate);
   }
+
+  findPointFromEnd(distance) {
+    const ratio = distance / this.length;
+    const xCoordinate = (1 - ratio) * this.endB.x + ratio * this.endA.x;
+    const yCoordinate = (1 - ratio) * this.endB.y + ratio * this.endA.y;
+    if (
+      isPointNotInRange([this.endA.x, this.endB.x], xCoordinate) ||
+      isPointNotInRange([this.endA.y, this.endB.y], yCoordinate)
+    )
+      return null;
+    return new Point(xCoordinate, yCoordinate);
+  }
 }
 
 module.exports = Line;
