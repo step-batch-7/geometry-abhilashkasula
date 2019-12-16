@@ -26,6 +26,10 @@ class Point {
     const diffOfYCoordinates = otherPoint.y - this.y;
     return Math.hypot(diffOfXCoordinates, diffOfYCoordinates);
   }
+
+  isOn(line) {
+    return line.hasPoint(this);
+  }
 }
 
 module.exports = Point;

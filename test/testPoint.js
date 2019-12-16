@@ -1,5 +1,6 @@
 const { assert } = require("chai");
 const Point = require("../src/point");
+const Line = require("../src/line");
 
 describe("Point", function() {
   describe("toString", function() {
@@ -71,10 +72,22 @@ describe("Point", function() {
       const point2 = new Point(7, 2);
       assert.strictEqual(point1.findDistanceTo(point2), 5);
     });
-    it("should give the NaN two points given for the point is not instances of Point", function() {
+    it("should give NaN two points given for the point given is not instances of Point", function() {
       const point1 = new Point(2, 2);
       const point2 = { x: 7, y: 2 };
       assert.isNaN(point1.findDistanceTo(point2));
+    });
+    it("should give zero for the points given are equal", () => {
+      const point = new Point(2, 3);
+      assert.strictEqual(point.findDistanceTo(point), 0);
+    });
+  });
+
+  describe("isOn", function() {
+    it("should determine true for the point is on the line", function() {
+      const line = new Line({ x: 4, y: 4 }, { x: 8, y: 8 });
+      const point = new Point(6, 6);
+      assert.isOk(point.isOn(line));
     });
   });
 });
