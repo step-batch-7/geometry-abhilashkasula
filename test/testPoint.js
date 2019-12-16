@@ -1,6 +1,7 @@
 const { assert } = require("chai");
 const Point = require("../src/point");
 const Line = require("../src/line");
+const Circle = require("../src/circle");
 
 describe("Point", function() {
   describe("toString", function() {
@@ -84,25 +85,25 @@ describe("Point", function() {
   });
 
   describe("isOn", function() {
-    it("should determine true for the point is on the line", function() {
+    it("should determine true for the point is on the line for Line is given", function() {
       const line = new Line({ x: 4, y: 4 }, { x: 8, y: 8 });
       const point = new Point(6, 6);
       assert.isOk(point.isOn(line));
     });
-    it("should determine false for the point not on the line", () => {
+    it("should determine false for the point not on the line for Line is given", () => {
       const line = new Line({ x: 4, y: 4 }, { x: 8, y: 8 });
       const point = new Point(4, 6);
       assert.isNotOk(point.isOn(line));
     });
-    it("should determine true for the point is on the line when negative coordinates are give", function() {
-      const line = new Line({ x: -4, y: -4 }, { x: -8, y: -8 });
-      const point = new Point(-6, -6);
-      assert.isOk(point.isOn(line));
+    it("should determine true for the point on the circle for Circle is given", () => {
+      const circle = new Circle({ x: 5, y: 5 }, 2);
+      const point = new Point(5, 3);
+      assert.isOk(point.isOn(circle));
     });
-    it("should determine false for the point not on the line when negative coordinates are given", () => {
-      const line = new Line({ x: 4, y: 4 }, { x: -8, y: -8 });
-      const point = new Point(-4, -6);
-      assert.isNotOk(point.isOn(line));
+    it("should determine true for the point not on the circle for Circle is given", () => {
+      const circle = new Circle({ x: 5, y: 5 }, 2);
+      const point = new Point(5, 2);
+      assert.isNotOk(point.isOn(circle));
     });
   });
 });
