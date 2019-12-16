@@ -14,5 +14,20 @@ describe("Circle", function() {
       const circle2 = new Circle({ x: 1, y: 2 }, 5);
       assert.isOk(circle1.isEqualTo(circle2));
     });
+    it("should determine false for the given circle radius is not equal but it's instance and centre are equal", function() {
+      const circle1 = new Circle({ x: 1, y: 2 }, 3);
+      const circle2 = new Circle({ x: 1, y: 2 }, 5);
+      assert.isNotOk(circle1.isEqualTo(circle2));
+    });
+    it("should determine false for the given circle centre is not equal but it's instance and radius are equal", function() {
+      const circle1 = new Circle({ x: 2, y: 2 }, 5);
+      const circle2 = new Circle({ x: 1, y: 2 }, 5);
+      assert.isNotOk(circle1.isEqualTo(circle2));
+    });
+    it("should determine false for the given circle centre is not an instance of Circle but it's centre and radius are equal", function() {
+      const circle1 = new Circle({ x: 2, y: 2 }, 5);
+      const circle2 = { centre: { x: 1, y: 2 }, radius: 5 };
+      assert.isNotOk(circle1.isEqualTo(circle2));
+    });
   });
 });
