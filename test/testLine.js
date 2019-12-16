@@ -196,4 +196,12 @@ describe("Line", function() {
       assert.isNotOk(line.hasPoint(point));
     });
   });
+
+  describe("findPointFromStart", function() {
+    it("should give the starting point for the distance is zero", function() {
+      const line = new Line({ x: 1, y: 4 }, { x: 1, y: 8 });
+      const point = new Point(1, 4);
+      assert.deepStrictEqual(line.findPointFromStart(0), point);
+    });
+  });
 });

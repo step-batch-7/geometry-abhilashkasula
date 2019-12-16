@@ -94,6 +94,13 @@ class Line {
     const line2 = new Line(this.endB, point);
     return line1.length + line2.length == this.length;
   }
+
+  findPointFromStart(distance) {
+    const ratio = distance / this.length;
+    const xCoordinate = (1 - ratio) * this.endA.x + ratio * this.endB.x;
+    const yCoordinate = (1 - ratio) * this.endA.y + ratio * this.endB.y;
+    return new Point(xCoordinate, yCoordinate);
+  }
 }
 
 module.exports = Line;
