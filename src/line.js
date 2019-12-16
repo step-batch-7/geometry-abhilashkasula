@@ -1,6 +1,6 @@
 const Point = require("./point");
 
-const isNumberNotInRange = (range, coordinate) => {
+const isNotInRange = (range, coordinate) => {
   const min = Math.min(range[0], range[1]);
   const max = Math.max(range[0], range[1]);
   return coordinate > max || coordinate < min;
@@ -21,8 +21,8 @@ const getCoordinate = (ratio, coordinate1, coordinate2) => {
 
 class Line {
   constructor(endA, endB) {
-    this.endA = { x: endA.x, y: endA.y };
-    this.endB = { x: endB.x, y: endB.y };
+    this.endA = new Point(endA.x, endA.y);
+    this.endB = new Point(endB.x, endB.y);
   }
 
   toString() {
@@ -33,11 +33,7 @@ class Line {
   isEqualTo(other) {
     const { endA, endB } = other;
     if (!(other instanceof Line)) return false;
-    const thisEndA = new Point(this.endA.x, this.endA.y);
-    const thisEndB = new Point(this.endB.x, this.endB.y);
-    const otherEndA = new Point(endA.x, endA.y);
-    const otherEndB = new Point(endB.x, endB.y);
-    return thisEndA.isEqualTo(otherEndA) && thisEndB.isEqualTo(otherEndB);
+    return this.endA.isEqualTo(endA) && this.endB.isEqualTo(endB);
   }
 
   get length() {
@@ -64,7 +60,7 @@ class Line {
 
   findX(yCoordinate) {
     const { endA, endB } = this;
-    if (isNumberNotInRange([endA.y, endB.y], yCoordinate)) return NaN;
+    if (isNotInRange([endA.y, endB.y], yCoordinate)) return NaN;
     if (endA.y == endB.y) return endA.x;
     const diffOfYCoordinates = yCoordinate - endA.y;
     const product = this.slope * endA.x;
@@ -73,7 +69,7 @@ class Line {
 
   findY(xCoordinate) {
     const { endA, endB } = this;
-    if (isNumberNotInRange([endA.x, endB.x], xCoordinate)) return NaN;
+    if (isNotInRange([endA.x, endB.x], xCoordinate)) return NaN;
     if (endA.x == endB.x) return endA.y;
     const diffOfXCoordinates = xCoordinate - endA.x;
     const product = this.slope * diffOfXCoordinates;
@@ -93,18 +89,14 @@ class Line {
 
   findPointFromStart(distance) {
     const ratio = distance / this.length;
-    if (ratio > 1 || ratio < 0) return null;
+    if (isNotInRange([0, 1], ratio)) return null;
     const x = getCoordinate(ratio, this.endA.x, this.endB.x);
     const y = getCoordinate(ratio, this.endA.y, this.endB.y);
     return new Point(x, y);
   }
 
   findPointFromEnd(distance) {
-    const ratio = distance / this.length;
-    if (ratio > 1 || ratio < 0) return null;
-    const xCoordinate = getCoordinate(ratio, this.endB.x, this.endA.x);
-    const yCoordinate = getCoordinate(ratio, this.endB.y, this.endA.y);
-    return new Point(xCoordinate, yCoordinate);
+    return this.findPointFromStart(this.length - distance);
   }
 }
 
