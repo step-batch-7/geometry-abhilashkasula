@@ -21,7 +21,7 @@ class Point {
   }
 
   findDistanceTo(otherPoint) {
-    const { endA, endB } = otherPoint;
+    if (!(otherPoint instanceof Point)) return NaN;
     const diffOfXCoordinates = otherPoint.x - this.x;
     const diffOfYCoordinates = otherPoint.y - this.y;
     return Math.hypot(diffOfXCoordinates, diffOfYCoordinates);

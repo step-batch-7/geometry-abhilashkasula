@@ -71,5 +71,10 @@ describe("Point", function() {
       const point2 = new Point(7, 2);
       assert.strictEqual(point1.findDistanceTo(point2), 5);
     });
+    it("should give the NaN two points given for the point is not instances of Point", function() {
+      const point1 = new Point(2, 2);
+      const point2 = { x: 7, y: 2 };
+      assert.isNaN(point1.findDistanceTo(point2));
+    });
   });
 });
