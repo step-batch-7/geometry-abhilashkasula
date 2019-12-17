@@ -96,9 +96,14 @@ describe("Circle", function() {
       const point = { x: 5, y: 2 };
       assert.isFalse(circle.covers(point));
     });
-    it("should determine true for the point is within the circle", () => {
+    it("should determine true for the point is on x-axis within the circle", () => {
       const circle = new Circle({ x: 5, y: 5 }, 2);
       const point = new Point(5, 4);
+      assert.isTrue(circle.covers(point));
+    });
+    it("should determine true for the point is on y-axis within the circle", () => {
+      const circle = new Circle({ x: 5, y: 5 }, 2);
+      const point = new Point(6, 5);
       assert.isTrue(circle.covers(point));
     });
     it("should determine false for the point is outside the circle", () => {
