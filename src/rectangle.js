@@ -1,12 +1,13 @@
+const Line = require("./line");
+
 class Rectangle {
   constructor(diagonalPoint1, diagonalPoint2) {
-    this.endA = { x: diagonalPoint1.x, y: diagonalPoint1.y };
-    this.endB = { x: diagonalPoint2.x, y: diagonalPoint2.y };
+    this.diagonal = new Line(diagonalPoint1, diagonalPoint2);
   }
 
   toString() {
-    return `[Rectangle (${this.endA.x},${this.endA.y}) to (${this.endB.x},${this.endB.y})]`;
+    const { endA, endB } = this.diagonal;
+    return `[Rectangle (${endA.x},${endA.y}) to (${endB.x},${endB.y})]`;
   }
 }
-
 module.exports = Rectangle;
