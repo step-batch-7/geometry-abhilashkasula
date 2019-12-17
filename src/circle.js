@@ -39,6 +39,11 @@ class Circle {
   moveTo(newCentre) {
     return new Circle(Object.assign({}, newCentre), this.radius);
   }
+
+  covers(point) {
+    if (!(point instanceof Point)) return false;
+    return !this.hasPoint(point);
+  }
 }
 
 module.exports = Circle;

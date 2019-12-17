@@ -61,7 +61,7 @@ class Line {
   findX(yCoordinate) {
     const { endA, endB } = this;
     if (isNotInRange([endA.y, endB.y], yCoordinate)) return NaN;
-    if (this.slope === 0 || this.slope === Infinity) return endA.x;
+    if (endA.y == endB.y || endA.x == endB.x) return endA.x;
     const diffOfYCoordinates = yCoordinate - endA.y;
     const product = this.slope * endA.x;
     return (diffOfYCoordinates + product) / this.slope;
@@ -70,7 +70,7 @@ class Line {
   findY(xCoordinate) {
     const { endA, endB } = this;
     if (isNotInRange([endA.x, endB.x], xCoordinate)) return NaN;
-    if (this.slope === Infinity || this.slope === 0) return endA.y;
+    if (endA.x == endB.x || endA.y == endB.y) return endA.y;
     const diffOfXCoordinates = xCoordinate - endA.x;
     const product = this.slope * diffOfXCoordinates;
     return product + endA.y;

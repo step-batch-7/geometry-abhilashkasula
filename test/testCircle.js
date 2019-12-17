@@ -78,5 +78,18 @@ describe("Circle", function() {
       const circle = new Circle({ x: 5, y: 5 }, 2);
       assert.isTrue(circle.moveTo({ x: 5, y: 5 }).isEqualTo(circle));
     });
+    it("should give the circle with same radius and new centre for the given point", () => {
+      const circle = new Circle({ x: 5, y: 5 }, 2);
+      const circle2 = new Circle({ x: 1, y: 2 }, 2);
+      assert.isTrue(circle.moveTo({ x: 1, y: 2 }).isEqualTo(circle2));
+    });
+  });
+
+  describe("covers", function() {
+    it("should determine false for the point on the circumference", function() {
+      const circle = new Circle({ x: 5, y: 5 }, 2);
+      const point = new Point(5, 3);
+      assert.isFalse(circle.covers(point));
+    });
   });
 });
