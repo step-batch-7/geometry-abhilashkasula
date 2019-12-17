@@ -91,5 +91,20 @@ describe("Circle", function() {
       const point = new Point(5, 3);
       assert.isFalse(circle.covers(point));
     });
+    it("should determine false for the point is not an instance of Point", () => {
+      const circle = new Circle({ x: 5, y: 5 }, 2);
+      const point = { x: 5, y: 2 };
+      assert.isFalse(circle.covers(point));
+    });
+    it("should determine true for the point is within the circle", () => {
+      const circle = new Circle({ x: 5, y: 5 }, 2);
+      const point = new Point(5, 4);
+      assert.isTrue(circle.covers(point));
+    });
+    it("should determine false for the point is outside the circle", () => {
+      const circle = new Circle({ x: 5, y: 5 }, 2);
+      const point = new Point(5, 8);
+      assert.isFalse(circle.covers(point));
+    });
   });
 });
