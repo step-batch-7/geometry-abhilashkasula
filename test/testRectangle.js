@@ -126,5 +126,20 @@ describe("Rectangle", () => {
       const point = new Point(1, 4);
       assert.isFalse(rectangle.covers(point));
     });
+    it("should determine false for the point not an instance of Point", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = { x: 1, y: 4 };
+      assert.isFalse(rectangle.covers(point));
+    });
+    it("should determine true for the point with in the Rectangle", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = new Point(2, 3);
+      assert.isTrue(rectangle.covers(point));
+    });
+    it("should determine false for the point out of the Rectangle", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = new Point(5, 8);
+      assert.isFalse(rectangle.covers(point));
+    });
   });
 });

@@ -1,6 +1,11 @@
 const Line = require("./line");
 const Point = require("./point");
 
+const isInRange = (range, number) => {
+  const [min, max] = range.sort((a, b) => a - b);
+  return number < max && number > min;
+};
+
 const getSides = diagonal => {
   const { endA, endB } = diagonal;
   const side1 = new Line(endA, { x: endA.x, y: endB.y });
@@ -50,7 +55,12 @@ class Rectangle {
   }
 
   covers(point) {
-    return !this.hasPoint(point);
+    if (!(point instanceof Point)) return false;
+    const { endA, endB } = this.diagonal;
+    return (
+      isInRange([endA.x, endB.x], point.x) &&
+      isInRange([endA.y, endB.y], point.y)
+    );
   }
 }
 module.exports = Rectangle;

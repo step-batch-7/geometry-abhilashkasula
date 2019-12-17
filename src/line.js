@@ -1,8 +1,7 @@
 const Point = require("./point");
 
 const isNotInRange = (range, number) => {
-  const min = Math.min(range[0], range[1]);
-  const max = Math.max(range[0], range[1]);
+  const [min, max] = range.sort((a, b) => a - b);
   return number > max || number < min;
 };
 
