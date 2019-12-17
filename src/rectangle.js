@@ -48,5 +48,9 @@ class Rectangle {
     const sides = getSides(this.diagonal);
     return sides.some(side => side.hasPoint(point));
   }
+
+  covers(point) {
+    return !this.hasPoint(point);
+  }
 }
 module.exports = Rectangle;

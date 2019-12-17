@@ -119,4 +119,12 @@ describe("Rectangle", () => {
       assert.isFalse(rectangle.hasPoint(point));
     });
   });
+
+  describe("covers", function() {
+    it("should determine false for the point on the sides", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = new Point(1, 4);
+      assert.isFalse(rectangle.covers(point));
+    });
+  });
 });
