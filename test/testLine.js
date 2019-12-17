@@ -102,10 +102,6 @@ describe("Line", function() {
       const line = new Line({ x: -1, y: -2 }, { x: 3, y: 3 });
       assert.strictEqual(line.slope, 1.25);
     });
-    it("should give Infinity for the given y-coordinates are equal", () => {
-      const line = new Line({ x: 3, y: 2 }, { x: 3, y: 1 });
-      assert.strictEqual(line.slope, Infinity);
-    });
   });
 
   describe("findX", function() {

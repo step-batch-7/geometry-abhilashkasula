@@ -72,4 +72,11 @@ describe("Circle", function() {
       assert.isNotOk(circle.hasPoint(point));
     });
   });
+
+  describe("moveTo", function() {
+    it("should give the circle with same centre for the same centre given as the circle centre", function() {
+      const circle = new Circle({ x: 5, y: 5 }, 2);
+      assert.isTrue(circle.moveTo({ x: 5, y: 5 }).isEqualTo(circle));
+    });
+  });
 });

@@ -47,8 +47,7 @@ class Line {
     const { endA, endB } = this;
     const diffOfYCoordinates = endB.y - endA.y;
     const diffOfXCoordinates = endB.x - endA.x;
-    const slopeOfLine = diffOfYCoordinates / diffOfXCoordinates;
-    return slopeOfLine == -Infinity ? Infinity : slopeOfLine;
+    return diffOfYCoordinates / diffOfXCoordinates;
   }
 
   isParallelTo(other) {

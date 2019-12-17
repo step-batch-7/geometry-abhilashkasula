@@ -35,6 +35,10 @@ class Circle {
       this.radius
     );
   }
+
+  moveTo(newCentre) {
+    return new Circle(Object.assign({}, newCentre), this.radius);
+  }
 }
 
 module.exports = Circle;
