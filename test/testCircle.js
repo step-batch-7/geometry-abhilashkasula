@@ -86,10 +86,10 @@ describe("Circle", function() {
   });
 
   describe("covers", function() {
-    it("should determine false for the point on the circumference", function() {
+    it("should determine true for the point on the circumference", function() {
       const circle = new Circle({ x: 5, y: 5 }, 2);
       const point = new Point(5, 3);
-      assert.isFalse(circle.covers(point));
+      assert.isTrue(circle.covers(point));
     });
     it("should determine false for the point is not an instance of Point", () => {
       const circle = new Circle({ x: 5, y: 5 }, 2);

@@ -1,5 +1,6 @@
 const { assert } = require("chai");
 const Rectangle = require("../src/rectangle");
+const Point = require("../src/point");
 
 describe("Rectangle", () => {
   describe("toString", function() {
@@ -73,6 +74,19 @@ describe("Rectangle", () => {
     it("should give perimeter as two time of breadth for length is zero", function() {
       const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 5, y: 0 });
       assert.strictEqual(rectangle.perimeter, 10);
+    });
+  });
+
+  describe("hasPoint", function() {
+    it("should determine true for the point on the left side", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = new Point(5, 4);
+      assert.isTrue(rectangle.hasPoint(point));
+    });
+    it("should determine false for the given point is not an instance of Point", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const point = { x: 5, y: 4 };
+      assert.isFalse(rectangle.hasPoint(point));
     });
   });
 });
