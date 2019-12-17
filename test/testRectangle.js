@@ -62,5 +62,17 @@ describe("Rectangle", () => {
       const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 0, y: 0 });
       assert.strictEqual(rectangle.perimeter, 0);
     });
+    it("should give perimeter for diagonal length is greater than zero", function() {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 5, y: 5 });
+      assert.strictEqual(rectangle.perimeter, 20);
+    });
+    it("should give perimeter as two time of length for breadth is zero", function() {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 0, y: 5 });
+      assert.strictEqual(rectangle.perimeter, 10);
+    });
+    it("should give perimeter as two time of breadth for length is zero", function() {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 5, y: 0 });
+      assert.strictEqual(rectangle.perimeter, 10);
+    });
   });
 });
