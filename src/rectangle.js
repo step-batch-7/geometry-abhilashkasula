@@ -22,7 +22,15 @@ class Rectangle {
 
   isEqualTo(otherRectangle) {
     if (!(otherRectangle instanceof Rectangle)) return false;
-    return this.diagonal.isEqualTo(otherRectangle.diagonal);
+    const { endA, endB } = otherRectangle.diagonal;
+    const otherDiagonal = new Line(
+      { x: endA.x, y: endB.y },
+      { x: endB.x, y: endA.y }
+    );
+    return (
+      this.diagonal.isEqualTo(otherRectangle.diagonal) ||
+      this.diagonal.isEqualTo(otherDiagonal)
+    );
   }
 
   get area() {

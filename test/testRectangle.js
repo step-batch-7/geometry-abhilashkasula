@@ -37,6 +37,16 @@ describe("Rectangle", () => {
       const rectangle2 = {};
       assert.isFalse(rectangle.isEqualTo(rectangle2));
     });
+    it("should determine true for the coordinates of diagonal are given in any order", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const rectangle2 = new Rectangle({ x: 5, y: 4 }, { x: 1, y: 1 });
+      assert.isTrue(rectangle.isEqualTo(rectangle2));
+    });
+    it("should determine true when the second diagonal of rectangle is given", function() {
+      const rectangle = new Rectangle({ x: 1, y: 1 }, { x: 5, y: 4 });
+      const rectangle2 = new Rectangle({ x: 1, y: 4 }, { x: 5, y: 1 });
+      assert.isTrue(rectangle.isEqualTo(rectangle2));
+    });
   });
 
   describe("area", function() {
