@@ -35,6 +35,11 @@ describe("Line", function() {
       const otherLine = new Line({ x: 12, y: 13 }, { x: 10, y: 11 });
       assert.isTrue(line.isEqualTo(otherLine));
     });
+    it("should invalidate two unequal lines", () => {
+      const line = new Line({ x: 1, y: 1 }, { x: 1, y: 1 });
+      const otherLine = new Line({ x: 1, y: 1 }, { x: 2, y: 1 });
+      assert.notOk(line.isEqualTo(otherLine));
+    });
   });
 
   describe("length", function() {
@@ -82,8 +87,6 @@ describe("Line", function() {
       let line1 = new Line({ x: 0, y: 0 }, { x: 4, y: 0 });
       let line2 = new Line({ x: 1, y: 0 }, { x: 3, y: 0 });
       assert.isNotOk(line1.isParallelTo(line2));
-    });
-    it("should", () => {
       line1 = new Line({ x: 0, y: 0 }, { x: 0, y: 4 });
       line2 = new Line({ x: 0, y: 1 }, { x: 0, y: 3 });
       assert.isNotOk(line1.isParallelTo(line2));
@@ -98,6 +101,10 @@ describe("Line", function() {
     it("should give slope of a line for negative coordinates", function() {
       const line = new Line({ x: -1, y: -2 }, { x: 3, y: 3 });
       assert.strictEqual(line.slope, 1.25);
+    });
+    it("should give Infinity for the given y-coordinates are equal", () => {
+      const line = new Line({ x: 3, y: 2 }, { x: 3, y: 1 });
+      assert.strictEqual(line.slope, Infinity);
     });
   });
 
@@ -225,6 +232,12 @@ describe("Line", function() {
     it("should give null for there is no given distance is negative", function() {
       const line = new Line({ x: 2, y: 4 }, { x: 2, y: 8 });
       assert.isNull(line.findPointFromStart(-1));
+    });
+    it("should give a point on the line in given distance in the forward direction when point is in x axis", () => {
+      const line = new Line({ x: 0, y: 0 }, { x: 5, y: 0 });
+      const point = new Point(2, 0);
+      const pointInDistance = line.findPointFromStart(2);
+      assert.isTrue(point.isEqualTo(pointInDistance));
     });
   });
 

@@ -82,6 +82,11 @@ describe("Point", function() {
       const point = new Point(2, 3);
       assert.strictEqual(point.findDistanceTo(point), 0);
     });
+    it("should give decimal number also as distance", () => {
+      const point = new Point(2, 3);
+      const point2 = new Point(5, 2);
+      assert.approximately(point.findDistanceTo(point2), 3.1, 0.1);
+    });
   });
 
   describe("isOn", function() {

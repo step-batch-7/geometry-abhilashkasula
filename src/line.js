@@ -34,8 +34,8 @@ class Line {
     const { endA, endB } = other;
     if (!(other instanceof Line)) return false;
     return (
-      (this.endA.isEqualTo(endA) || this.endA.isEqualTo(endB)) &&
-      (this.endB.isEqualTo(endB) || this.endB.isEqualTo(endA))
+      (this.endA.isEqualTo(endA) && this.endB.isEqualTo(endB)) ||
+      (this.endA.isEqualTo(endB) && this.endB.isEqualTo(endA))
     );
   }
 
@@ -47,7 +47,8 @@ class Line {
     const { endA, endB } = this;
     const diffOfYCoordinates = endB.y - endA.y;
     const diffOfXCoordinates = endB.x - endA.x;
-    return diffOfYCoordinates / diffOfXCoordinates;
+    const slopeOfLine = diffOfYCoordinates / diffOfXCoordinates;
+    return slopeOfLine == -Infinity ? Infinity : slopeOfLine;
   }
 
   isParallelTo(other) {
@@ -61,7 +62,7 @@ class Line {
   findX(yCoordinate) {
     const { endA, endB } = this;
     if (isNotInRange([endA.y, endB.y], yCoordinate)) return NaN;
-    if (endA.y == endB.y || endA.x == endB.x) return endA.x;
+    if (this.slope === 0 || this.slope === Infinity) return endA.x;
     const diffOfYCoordinates = yCoordinate - endA.y;
     const product = this.slope * endA.x;
     return (diffOfYCoordinates + product) / this.slope;
@@ -70,7 +71,7 @@ class Line {
   findY(xCoordinate) {
     const { endA, endB } = this;
     if (isNotInRange([endA.x, endB.x], xCoordinate)) return NaN;
-    if (endA.x == endB.x || endA.y == endB.y) return endA.y;
+    if (this.slope === Infinity || this.slope === 0) return endA.y;
     const diffOfXCoordinates = xCoordinate - endA.x;
     const product = this.slope * diffOfXCoordinates;
     return product + endA.y;
@@ -88,7 +89,6 @@ class Line {
   }
 
   findPointFromStart(distance) {
-    if (!Number.isInteger(distance)) return null;
     const ratio = distance / this.length;
     if (isNotInRange([0, 1], ratio)) return null;
     const x = getCoordinate(ratio, this.endA.x, this.endB.x);
