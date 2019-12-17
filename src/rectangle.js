@@ -2,8 +2,8 @@ const Line = require("./line");
 
 const getSides = diagonal => {
   const { endA, endB } = diagonal;
-  const side1 = new Line(diagonal.endA, { x: endA.x, y: endB.y });
-  const side2 = new Line(diagonal.endB, { x: endB.x, y: endA.y });
+  const side1 = new Line(endA, { x: endA.x, y: endB.y });
+  const side2 = new Line(endA, { x: endB.x, y: endA.y });
   return [side1, side2];
 };
 

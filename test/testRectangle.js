@@ -43,5 +43,17 @@ describe("Rectangle", () => {
       const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 0, y: 0 });
       assert.strictEqual(rectangle.area, 0);
     });
+    it("should give area for diagonal length is greater than zero", function() {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 7, y: 7 });
+      assert.strictEqual(rectangle.area, 49);
+    });
+    it("should give zero for breadth is zero", function() {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 0, y: 5 });
+      assert.strictEqual(rectangle.area, 0);
+    });
+    it("should give zero for length is zero", function() {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 5, y: 0 });
+      assert.strictEqual(rectangle.area, 0);
+    });
   });
 });
