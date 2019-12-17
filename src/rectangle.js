@@ -26,5 +26,10 @@ class Rectangle {
     const [side1, side2] = getSides(this.diagonal);
     return side1.length * side2.length;
   }
+
+  get perimeter() {
+    const [side1, side2] = getSides(this.diagonal);
+    return side1.length * 2 + side2.length * 2;
+  }
 }
 module.exports = Rectangle;

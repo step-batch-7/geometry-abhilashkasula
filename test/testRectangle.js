@@ -56,4 +56,11 @@ describe("Rectangle", () => {
       assert.strictEqual(rectangle.area, 0);
     });
   });
+
+  describe("perimeter", function() {
+    it("should give zero for diagonal length is zero", function() {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 0, y: 0 });
+      assert.strictEqual(rectangle.perimeter, 0);
+    });
+  });
 });
