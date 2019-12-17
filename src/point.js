@@ -27,8 +27,8 @@ class Point {
     return Math.hypot(diffOfXCoordinates, diffOfYCoordinates);
   }
 
-  isOn(line) {
-    return line.hasPoint(this);
+  isOn(shape) {
+    return shape.hasPoint(this);
   }
 }
 

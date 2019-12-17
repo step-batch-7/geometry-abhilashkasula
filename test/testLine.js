@@ -30,6 +30,11 @@ describe("Line", function() {
       const line2 = { endA: { x: 1, y: 2 }, endB: { x: 4, y: 5 } };
       assert.isNotOk(line1.isEqualTo(line2));
     });
+    it("should validate when start of one line is equal to end of other line and vise versa", () => {
+      const line = new Line({ x: 10, y: 11 }, { x: 12, y: 13 });
+      const otherLine = new Line({ x: 12, y: 13 }, { x: 10, y: 11 });
+      assert.isTrue(line.isEqualTo(otherLine));
+    });
   });
 
   describe("length", function() {
@@ -101,7 +106,7 @@ describe("Line", function() {
       const line = new Line({ x: 5, y: 5 }, { x: 1, y: 2 });
       assert.approximately(line.findX(3), 2.3, 0.2);
     });
-    it("should give x-coordinate of a point when y is given negative", function() {
+    it("should give x-coordinate of a starting point when the coordinates are given negative and y is given the same coordinate as starting point", function() {
       const line = new Line({ x: -5, y: -3 }, { x: -1, y: -4 });
       assert.approximately(line.findX(-3), -5, 0.2);
     });
