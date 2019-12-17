@@ -37,4 +37,11 @@ describe("Rectangle", () => {
       assert.isFalse(rectangle.isEqualTo(rectangle2));
     });
   });
+
+  describe("area", function() {
+    it("should give zero for diagonal length is zero", function() {
+      const rectangle = new Rectangle({ x: 0, y: 0 }, { x: 0, y: 0 });
+      assert.strictEqual(rectangle.area, 0);
+    });
+  });
 });
