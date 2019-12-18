@@ -2,6 +2,7 @@ class Point {
   constructor(x, y) {
     this.x = x;
     this.y = y;
+    Object.freeze(this);
   }
   toString() {
     return `[Point @(${this.x},${this.y})]`;

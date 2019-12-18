@@ -11,6 +11,16 @@ describe("Point", function() {
     });
   });
 
+  describe("edit", function() {
+    it("should not modify the point constructed", function() {
+      const point = new Point(2, 3);
+      point.x = 4;
+      point.y = 6;
+      const point2 = new Point(2, 3);
+      assert.isTrue(point.isEqualTo(point2));
+    });
+  });
+
   describe("visit", function() {
     it("should give the sum of coordinates of the point for function reference sum", function() {
       const point = new Point(2, 3);
