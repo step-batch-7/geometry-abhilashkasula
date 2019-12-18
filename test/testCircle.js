@@ -111,5 +111,10 @@ describe("Circle", function() {
       const point = new Point(5, 8);
       assert.isFalse(circle.covers(point));
     });
+    it("should determine true for the point is on the centre of circle", () => {
+      const circle = new Circle({ x: 5, y: 5 }, 2);
+      const point = new Point(5, 5);
+      assert.isTrue(circle.covers(point));
+    });
   });
 });
